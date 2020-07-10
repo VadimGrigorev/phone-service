@@ -10,11 +10,11 @@ import java.util.List;
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface PhoneServiceInterface {
 
-    public String createContact(Contact contact);
+    public Contact createContact(Contact contact);
 
-    public String getContacts();
+    public Contact[] getContacts();
 
-    public String deleteContact(int id);
+    public Contact deleteContact(int id);
 
-    public String modifyContact(Contact contact);
+    public Contact modifyContact(Contact contact);
 }

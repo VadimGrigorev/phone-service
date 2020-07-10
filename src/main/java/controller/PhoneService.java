@@ -14,7 +14,7 @@ import java.util.List;
 public class PhoneService implements PhoneServiceInterface{
 
     @Override
-    public String createContact(Contact contact){
+    public Contact createContact(Contact contact){
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
@@ -29,24 +29,31 @@ public class PhoneService implements PhoneServiceInterface{
             }
             e.printStackTrace();
         }
-        return "contact";
+        return contact;
     }
 
     //get all contacts from database
     @Override
-    public String getContacts(){
+    public Contact[] getContacts(){
         List<Contact> contacts = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             contacts = session.createQuery("from Contact", Contact.class).list();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "contacts";
+
+        //convert list to array
+        Contact[] contactsArray = new Contact[contacts.size()];
+        for(int i = 0; i < contactsArray.length; i++){
+            contactsArray[i] = contacts.get(i);
+        }
+
+        return contactsArray;
     }
 
     //delete a contact by id
     @Override
-    public String deleteContact(int id){
+    public Contact deleteContact(int id){
         Contact contact = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             contact = session.get(Contact.class, id);
@@ -56,11 +63,11 @@ public class PhoneService implements PhoneServiceInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "contact";
+        return contact;
     }
 
     @Override
-    public String modifyContact(Contact contact){
+    public Contact modifyContact(Contact contact){
         Contact contactToModify = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -86,7 +93,7 @@ public class PhoneService implements PhoneServiceInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "contactToModify";
+        return contactToModify;
     }
 
 }
