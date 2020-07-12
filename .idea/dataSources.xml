@@ -11,5 +11,11 @@ C:/Users/Vadim/IdeaProjects/phone-service/src/main/resources/hibernate.cfg.xml</
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:phonebook.db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="phonebook.db" uuid="cc1d0a4c-8a04-4fee-81a1-075f56af7bff">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:phonebook.db</jdbc-url>
+    </data-source>
   </component>
 </project>

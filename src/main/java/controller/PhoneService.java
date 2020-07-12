@@ -37,7 +37,7 @@ public class PhoneService implements PhoneServiceInterface{
     public Contact[] getContacts(){
         List<Contact> contacts = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            contacts = session.createQuery("from Contact", Contact.class).list();
+            contacts = session.createQuery("from entities.Contact", Contact.class).list();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,6 +60,7 @@ public class PhoneService implements PhoneServiceInterface{
             Transaction transaction = session.beginTransaction();
             session.delete(contact);
             session.flush();
+            transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
